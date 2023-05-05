@@ -6,7 +6,7 @@
 /*   By: jmarinho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:31:25 by jmarinho          #+#    #+#             */
-/*   Updated: 2023/05/05 13:07:32 by jmarinho         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:45:00 by jmarinho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,15 @@ char	*ft_strchr(char *temp, char line_break)
 
 	i = 0;
 	if (!temp)
-		return (0);
+		return (NULL);
 	while (temp[i])
 	{
 		if (temp[i] == line_break)
 			return (&temp[i]);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
-
 
 char	*ft_strjoin(char *temp, char *buffer)
 {
@@ -52,8 +51,6 @@ char	*ft_strjoin(char *temp, char *buffer)
 		temp = malloc(sizeof(char) * 1);
 		temp[0] = '\0';
 	}
-	if (!temp || !buffer)
-		return (NULL);
 	strjoin = malloc(sizeof(char) *((ft_strlen(temp) + ft_strlen(buffer)) + 1));
 	if (!strjoin)
 		return (NULL);
@@ -69,53 +66,53 @@ char	*ft_strjoin(char *temp, char *buffer)
 char	*ft_get_line(char *temp)
 {
 	int		i;
-	char	*str;
+	char	*line;
 
 	i = 0;
 	if (!temp[i])
 		return (NULL);
 	while (temp[i] != '\0' && temp[i] != '\n')
 		i++;
-	str = malloc(sizeof(char) * (i + 2));
-	if (!str)
+	if (temp[i] == '\0')
+		line = malloc(sizeof(char) * (i + 1));
+	else
+		line = malloc(sizeof(char) * (i + 2));
+	if (!line)
 		return (NULL);
 	i = 0;
 	while (temp[i] != '\0' && temp[i] != '\n')
 	{
-		str[i] = temp[i];
+		line[i] = temp[i];
 		i++;
 	}
 	if (temp[i] == '\n')
-	{
-		str[i] = '\n';
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+		line[i++] = '\n';
+	line[i] = '\0';
+	return (line);
 }
 
 char	*ft_new_temp(char *temp)
 {
 	int		i;
 	int		j;
-	char	*str;
+	char	*new_temp;
 
 	i = 0;
 	j = 0;
 	while (temp[i] != '\n' && temp[i])
 		i++;
-	if (!temp[i])
+	if (temp[i] == '\0')
 	{
 		free(temp);
 		return (NULL);
 	}
-	str = malloc(sizeof(char) * (ft_strlen(temp) - i + 1));
-	if (!str)
+	new_temp = malloc(sizeof(char) * (ft_strlen(temp) - i + 1));
+	if (!new_temp)
 		return (NULL);
 	i = i + 1;
 	while (temp[i])
-		str[j++] = temp[i++];
-	str[j] = '\0';
+		new_temp[j++] = temp[i++];
+	new_temp[j] = '\0';
 	free(temp);
-	return (str);
+	return (new_temp);
 }

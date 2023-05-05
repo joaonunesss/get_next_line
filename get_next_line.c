@@ -6,7 +6,7 @@
 /*   By: jmarinho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:28:30 by jmarinho          #+#    #+#             */
-/*   Updated: 2023/05/05 13:27:28 by jmarinho         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:44:25 by jmarinho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_read_and_join(int fd, char *temp)
 	if (!buffer)
 		return (NULL);
 	bytes_read = 1;
-	while (ft_strchr(temp, '\n') == 0 && bytes_read > 0)
+	while (ft_strchr(temp, '\n') == NULL && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
@@ -44,7 +44,7 @@ char	*get_next_line(int fd)
 	static char	*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
+		return (NULL);
 	temp = ft_read_and_join(fd, temp);
 	if (!temp)
 		return (NULL);
