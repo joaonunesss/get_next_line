@@ -6,7 +6,7 @@
 /*   By: jmarinho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:29:13 by jmarinho          #+#    #+#             */
-/*   Updated: 2023/05/04 13:09:30 by jmarinho         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:00:00 by jmarinho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,11 @@
 # endif
 
 char	*get_next_line(int fd);
+char	*ft_read_and_join(int fd, char *temp);
+int		ft_strlen(char *str);
+char	*ft_strchr(char *str, char line_break);
+char	*ft_strjoin(char *temp, char *buffer);
+char	*ft_get_line(char *temp);
+char	*ft_new_temp(char *temp);
+
 #endif

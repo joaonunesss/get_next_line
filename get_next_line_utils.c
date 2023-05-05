@@ -6,7 +6,7 @@
 /*   By: jmarinho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:31:25 by jmarinho          #+#    #+#             */
-/*   Updated: 2023/05/04 13:04:14 by jmarinho         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:34:54 by jmarinho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	ft_strchr(char *temp, char line_break)
+char	*ft_strchr(char *temp, char line_break)
 {
 	int	i;
 
@@ -38,33 +38,31 @@ char	ft_strchr(char *temp, char line_break)
 	return (0);
 }
 
+/*Primeiro if inicializa na primeira passagem */
+
 char	*ft_strjoin(char *temp, char *buffer)
 {
 	int		i;
 	int		j;
 	char	*strjoin;
-	int		len_temp;
 
-	i = 0;
+	i = -1;
 	j = 0;
+	if (!temp)
+	{
+		temp = malloc(sizeof(char) * 1);
+		temp[0] = '\0';
+	}
 	if (!temp || !buffer)
 		return (NULL);
-	len_temp = ft_strlen(temp);
-	strjoin = malloc(sizeof(char) * (len_temp + ft_strlen(buffer) + 1));
+	strjoin = malloc(sizeof(char) *((ft_strlen(temp) + ft_strlen(buffer)) + 1));
 	if (!strjoin)
 		return (NULL);
-	while (temp)
-	{
+	while (temp[++i])
 		strjoin[i] = temp[i];
-		i++;
-	}
-	while (buffer[j] != '\0')
-	{
-		strjoin[i] = buffer[j];
-		i++;
-		j++;
-	}
-	strjoin[i + 1] = '\0';
+	while (buffer[j])
+		strjoin[i++] = buffer[j++];
+	strjoin[i] = '\0';
 	free(temp);
 	return (strjoin);
 }
@@ -75,9 +73,11 @@ char	*ft_get_line(char *temp)
 	char	*str;
 
 	i = 0;
+	if (!temp[i])
+		return (NULL);
 	while (temp[i] != '\0' && temp[i] != '\n')
 		i++;
-	str = malloc(sizeof(char) * i + 2);
+	str = malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -87,8 +87,11 @@ char	*ft_get_line(char *temp)
 		i++;
 	}
 	if (temp[i] == '\n')
+	{
 		str[i] = '\n';
-	str[i + 1] = '\0';
+		i++;
+	}
+	str[i] = '\0';
 	return (str);
 }
 
@@ -96,28 +99,23 @@ char	*ft_new_temp(char *temp)
 {
 	int		i;
 	int		j;
-	int		len_temp;
 	char	*str;
 
 	i = 0;
 	j = 0;
-	len_temp = ft_strlen(temp);
-	while (temp[i] != '\n' && temp[i] != '\0')
+	while (temp[i] != '\n' && temp[i])
 		i++;
-	if (!temp)
+	if (!temp[i])
 	{
 		free(temp);
 		return (NULL);
 	}
-	str = malloc(sizeof(char) * (len_temp - i + 1));
+	str = malloc(sizeof(char) * (ft_strlen(temp) - i + 1));
 	if (!str)
 		return (NULL);
 	i = i + 1;
-	while (temp[i] != '\0')
-	{
-		str[j] = temp[i] i++;
-		j++;
-	}
+	while (temp[i])
+		str[j++] = temp[i++];
 	str[j] = '\0';
 	free(temp);
 	return (str);
