@@ -6,7 +6,7 @@
 /*   By: jmarinho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:28:30 by jmarinho          #+#    #+#             */
-/*   Updated: 2023/05/05 14:36:50 by jmarinho         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:50:41 by jmarinho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_read_and_join(int fd, char *temp)
 		if (bytes_read == -1)
 		{
 			free(buffer);
+			free(temp);
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';

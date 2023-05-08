@@ -6,7 +6,7 @@
 /*   By: jmarinho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:31:25 by jmarinho          #+#    #+#             */
-/*   Updated: 2023/05/05 17:45:15 by jmarinho         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:43:36 by jmarinho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strchr(char *temp, char line_break)
 			return (&temp[i]);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
 char	*ft_strjoin(char *temp, char *buffer)
@@ -51,7 +51,8 @@ char	*ft_strjoin(char *temp, char *buffer)
 		temp = malloc(sizeof(char) * 1);
 		temp[0] = '\0';
 	}
-	strjoin = malloc(sizeof(char) *((ft_strlen(temp) + ft_strlen(buffer)) + 1));
+	strjoin = malloc(sizeof(char) * ((ft_strlen(temp) + ft_strlen(buffer))
+				+ 1));
 	if (!strjoin)
 		return (NULL);
 	while (temp[++i])
@@ -99,9 +100,9 @@ char	*ft_new_temp(char *temp)
 
 	i = 0;
 	j = 0;
-	while (temp[i] != '\n' && temp[i])
+	while (temp[i] != '\n' && temp[i] != '\0')
 		i++;
-	if (!temp[i])
+	if (temp[i] == '\0')
 	{
 		free(temp);
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: jmarinho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:31:25 by jmarinho          #+#    #+#             */
-/*   Updated: 2023/05/05 17:45:00 by jmarinho         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:07:47 by jmarinho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*ft_new_temp(char *temp)
 
 	i = 0;
 	j = 0;
-	while (temp[i] != '\n' && temp[i])
+	while (temp[i] != '\0' && temp[i] != '\n')
 		i++;
 	if (temp[i] == '\0')
 	{
